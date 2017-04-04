@@ -28,8 +28,8 @@ namespace AtomGraph
                 {
                     if (!TransactionLog.Value.ContainsKey(this))
                     {
-                        var copy = _concrete;
-                        TransactionLog.Value[this] = () => _concrete = copy;
+                        var snapshot = _concrete;
+                        TransactionLog.Value[this] = () => _concrete = snapshot;
                     }
                 }
                 _concrete = value;

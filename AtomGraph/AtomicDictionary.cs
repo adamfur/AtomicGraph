@@ -15,13 +15,13 @@ namespace AtomGraph
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            Preserve();
+            Snapshot();
             _concrete.Add(item);
         }
 
         public void Clear()
         {
-            Preserve();
+            Snapshot();
             _concrete.Clear();
         }
 
@@ -32,13 +32,13 @@ namespace AtomGraph
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            Preserve();
+            Snapshot();
             _concrete.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            Preserve();
+            Snapshot();
             return _concrete.Remove(item);
         }
 
@@ -48,7 +48,7 @@ namespace AtomGraph
 
         public void Add(TKey key, TValue value)
         {
-            Preserve();
+            Snapshot();
             _concrete.Add(key, value);
         }
 
@@ -59,7 +59,7 @@ namespace AtomGraph
 
         public bool Remove(TKey key)
         {
-            Preserve();
+            Snapshot();
             return _concrete.Remove(key);
         }
 
@@ -78,14 +78,14 @@ namespace AtomGraph
 
         public ICollection<TValue> Values => _concrete.Values;
 
-        private void Preserve()
+        private void Snapshot()
         {
             if (TransactionLog.Value != null)
             {
                 if (!TransactionLog.Value.ContainsKey(this))
                 {
-                    var copy = _concrete.ToDictionary(x => x.Key, x => x.Value);
-                    TransactionLog.Value[this] = () => _concrete = copy;
+                    var snapshot = _concrete.ToDictionary(x => x.Key, x => x.Value);
+                    TransactionLog.Value[this] = () => _concrete = snapshot;
                 }
             }
         }

@@ -25,9 +25,9 @@ namespace AtomGraph
         {
             if (TransactionLog.Value != null)
             {
-                foreach (var log in TransactionLog.Value.Values)
+                foreach (var revert in TransactionLog.Value.Values)
                 {
-                    log();
+                    revert();
                 }
             }
 

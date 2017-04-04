@@ -15,13 +15,13 @@ namespace AtomGraph
 
         public void Add(T item)
         {
-            Preserve();
+            Snapshot();
             _concrete.Add(item);
         }
 
         public void Clear()
         {
-            Preserve();
+            Snapshot();
             _concrete.Clear();
         }
 
@@ -32,13 +32,13 @@ namespace AtomGraph
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            Preserve();
+            Snapshot();
             _concrete.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(T item)
         {
-            Preserve();
+            Snapshot();
             return _concrete.Remove(item);
         }
 
@@ -53,13 +53,13 @@ namespace AtomGraph
 
         public void Insert(int index, T item)
         {
-            Preserve();
+            Snapshot();
             _concrete.Insert(index, item);
         }
 
         public void RemoveAt(int index)
         {
-            Preserve();
+            Snapshot();
             _concrete.RemoveAt(index);
         }
 
@@ -69,14 +69,14 @@ namespace AtomGraph
             set { _concrete[index] = value; }
         }
 
-        private void Preserve()
+        private void Snapshot()
         {
             if (TransactionLog.Value != null)
             {
                 if (!TransactionLog.Value.ContainsKey(this))
                 {
-                    var copy = _concrete.ToList();
-                    TransactionLog.Value[this] = () => _concrete = copy;
+                    var snapshot = _concrete.ToList();
+                    TransactionLog.Value[this] = () => _concrete = snapshot;
                 }
             }
         }
