@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AtomGraph\AtomGraph.csproj" />
+    <ProjectReference Include="..\AtomicGraph\AtomicGraph.csproj" />
   </ItemGroup>
 
 </Project>

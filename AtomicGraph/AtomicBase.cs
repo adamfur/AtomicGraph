@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace AtomGraph
+namespace AtomicGraph
 {
     public abstract class AtomicBase
     {

@@ -1,4 +1,4 @@
-namespace AtomGraph
+namespace AtomicGraph
 {
     public class Atomic<T> : AtomicBase
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using AtomGraph;
+using AtomicGraph;
 
 namespace ConsoleApp1
 {
@@ -17,7 +17,7 @@ OUTPUT:
     {
         static void Main(string[] args)
         {
-            AtomicList<Atomic<int>> list = new AtomicList<Atomic<int>> { 2, 3 };
+            var list = new AtomicList<Atomic<int>> { 2, 3 };
 
             using (var scope = new AmbientAtomicScope())
             {

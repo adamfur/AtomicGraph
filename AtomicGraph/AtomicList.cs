@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AtomGraph
+namespace AtomicGraph
 {
     public class AtomicList<T> : AtomicBase, IList<T>
     {

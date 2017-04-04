@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AtomGraph
+namespace AtomicGraph
 {
     public class AmbientAtomicScope : AtomicBase, IDisposable
     {
