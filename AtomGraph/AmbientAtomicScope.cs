@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+
+namespace AtomGraph
+{
+    public class AmbientAtomicScope : AtomicBase, IDisposable
+    {
+        private readonly Dictionary<object, Action> _previous;
+
+        public AmbientAtomicScope()
+        {
+            _previous = TransactionLog.Value;
+            TransactionLog.Value = new Dictionary<object, Action>();
+        }
+
+        public void Commit()
+        {
+            if (TransactionLog.Value != null)
+            {
+                TransactionLog.Value.Clear();
+            }
+        }
+
+        public void Dispose()
+        {
+            if (TransactionLog.Value != null)
+            {
+                foreach (var log in TransactionLog.Value.Values)
+                {
+                    log();
+                }
+            }
+
+            TransactionLog.Value = _previous;
+        }
+    }
+}
